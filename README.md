@@ -1,7 +1,12 @@
-# Project Name
+# VERDEX
 
-## Problem
-## Hypothesis
-## Data Sources
-## Validation Metrics
-## Non-Goals
+Dropshipping Product Validation SaaS.
+
+## Tech Stack
+- React + Vite
+- Tailwind CSS
+- Node.js + Express
+- MongoDB Atlas
+
+## Status
+Stage 2 – Backend Foundation

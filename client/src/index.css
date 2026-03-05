@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #0B0F19;
+  color: #E5E7EB;
+  font-family: 'Inter Tight', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+}
+
+.card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-soft {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-soft:hover {
+  transform: translateY(-2px);
+}
+
+.clip-half {
+  clip-path: inset(0 0 50% 0);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.no-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.no-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    90deg,
+    rgba(120,120,130,0.4),
+    rgba(160,160,170,0.6)
+  );
+  border-radius: 10px;
+}
+
+.no-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(200,200,210,0.6);
+}
+
+html {
+  font-size: 13px;
+}
+
+@media (min-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1440px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+.auth-mode {
+  backdrop-filter: blur(4px);
+}
+
+@keyframes pulseSlot {
+  0% { box-shadow: 0 0 0px rgba(255,255,255,0.05); }
+  50% { box-shadow: 0 0 20px rgba(255,255,255,0.12); }
+  100% { box-shadow: 0 0 0px rgba(255,255,255,0.05); }
+}
+
+.otp-active {
+  animation: pulseSlot 2.5s infinite ease-in-out;
+}
+
+
