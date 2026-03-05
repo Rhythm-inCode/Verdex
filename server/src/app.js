@@ -17,7 +17,7 @@ import passport from "../config/passport.js";
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "http://verdex-ai.vercel.app",
   credentials: true
 }));
 
