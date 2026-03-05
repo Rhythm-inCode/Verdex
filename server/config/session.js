@@ -5,8 +5,8 @@ const sessionConfig = {
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",        
-    sameSite: "lax",      // IMPORTANT
+    secure: true,        
+    sameSite: "none",      // IMPORTANT
     maxAge: 1000 * 60 * 60 * 24
   }
 };
