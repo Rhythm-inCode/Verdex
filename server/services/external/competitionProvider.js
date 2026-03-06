@@ -14,12 +14,13 @@ const fetchCompetitionData = async ({ keyword }) => {
     );
 
   const totalResults =
-    response.data.search_information?.total_results || 0;
+    response.data?.search_information?.total_results;
 
   const resultCount = Number(totalResults);
 
-  if (!resultCount || resultCount <= 0) {
-    return { competitionRisk: 30 }; // low competition fallback
+  if (!resultCount || isNaN(resultCount)) {
+    console.log("SERP RAW:", response.data);
+    return { competitionRisk: 30 }; // fallback realistic
   }
 
   // log scale

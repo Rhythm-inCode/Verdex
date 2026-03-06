@@ -145,7 +145,7 @@ export default function Login({ setIsAuth }) {
 
           {/* Interactive layer */}
           <a
-            href="/api/auth/google"
+            href={`${import.meta.env.VITE_API_URL}/api/auth/google`}
             className="
               relative z-10
               flex items-center justify-center gap-4
