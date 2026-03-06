@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
+import googleIcon from "../assets/google.svg";
 import React from "react";
 
 export default function Login({ setIsAuth }) {
@@ -153,12 +154,8 @@ export default function Login({ setIsAuth }) {
               transition-all duration-300
               group-hover:text-white
             "
-          >
-            <img
-              src="/google-icon.svg"
-              alt="Google"
-              className="w-6 h-6 transition-transform duration-300 group-hover:rotate-6"
-            />
+         >
+          <img src={googleIcon} alt="Google" className="w-5 h-5" />
             <span>Authenticate via Google</span>
           </a>
 
