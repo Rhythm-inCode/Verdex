@@ -17,9 +17,10 @@ const runBusinessValidation = async ({ product }) => {
     keyword: product.name
   });
 
-  const demandScore = calculateDemandScore({
-    trendScore: trendData.trendScore
-  });
+  const demandScore =
+    typeof trendData.trendScore === "number"
+      ? trendData.trendScore
+      : 55;
 
   // 🔹 COMPETITION
   const competitionData = await fetchCompetitionData({

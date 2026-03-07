@@ -13,7 +13,16 @@ const fetchCompetitionData = async ({ keyword }) => {
     console.log("SERP OK");
 
     // ✅ CORRECT FIELD (ALWAYS EXISTS)
-    const resultCount = response.data?.organic_results?.length || 0;
+    const rawResults =
+      response.data?.search_information?.total_results ||
+      response.data?.search_information?.totalResults ||
+      0;
+
+    const resultCount = Number(
+      String(rawResults).replace(/[^0-9]/g, "")
+    );
+
+    console.log("RESULT COUNT:", resultCount);
 
     console.log("RESULT COUNT:", resultCount);
 
@@ -23,12 +32,26 @@ const fetchCompetitionData = async ({ keyword }) => {
     }
 
     // ✅ simple scaling (REALISTIC)
+
     let risk;
 
-    if (resultCount <= 3) risk = 20;
-    else if (resultCount <= 6) risk = 40;
-    else if (resultCount <= 9) risk = 65;
-    else risk = 85;
+    if (!resultCount || isNaN(resultCount)) {
+      risk = 50;
+    } 
+    else if (resultCount < 10000) {
+      risk = 35;
+    } 
+    else if (resultCount < 50000) {
+      risk = 55;
+    } 
+    else if (resultCount < 200000) {
+      risk = 75;
+    } 
+    else {
+      risk = 90;
+    }
+
+console.log("FINAL RISK:", risk);
 
     console.log("FINAL RISK:", risk);
 
