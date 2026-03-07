@@ -29,11 +29,6 @@ import fetchCompetitionData from "./external/competitionProvider.js";
 
   const competitionRisk = competitionData.competitionRisk;
 
-
-
-
-
-
   const profitMetrics = calculateProfitMetrics(product);
 
   const competitionScore =
@@ -50,15 +45,13 @@ import fetchCompetitionData from "./external/competitionProvider.js";
   });
 
   console.log("PROFIT METRICS:", profitMetrics);
+  console.log("CONFIG DEBUG:", config);
 
 
 return {
   demandScore: Number(demandScore) || 0,
 
-  competitionScore:
-  typeof competitionRisk === "number"
-    ? competitionRisk
-    : 35,
+  competitionScore: competitionRisk,
 
   grossProfit: Number(profitMetrics.grossProfit) || 0,
   netProfit: Number(profitMetrics.netProfit) || 0,
