@@ -1,7 +1,12 @@
 import axios from "axios";
 
 const fetchCompetitionData = async ({ keyword }) => {
+
+  console.log("=== COMPETITION RUNNING ===");
+
   try {
+    console.log("KEY:", process.env.SERP_API_KEY);
+console.log("KEY TYPE:", typeof process.env.SERP_API_KEY);
     console.log("SERP KEY:", process.env.SERP_API_KEY);
 
     const response = await axios.get("https://serpapi.com/search", {
@@ -35,10 +40,15 @@ const fetchCompetitionData = async ({ keyword }) => {
 
     const risk = Math.round(normalized * 100);
 
+    console.log("FINAL RISK:", risk);
+
     return { competitionRisk: risk };
 
   } catch (err) {
     console.error("SERP ERROR:", err.response?.data || err.message);
+
+    console.log("ERROR HIT");
+console.log(err.response?.data || err.message);
     return { competitionRisk: 35 };
   }
 };
