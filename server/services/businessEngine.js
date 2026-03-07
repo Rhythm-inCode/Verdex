@@ -68,7 +68,7 @@ return {
 
   productScore: Number(verdict.productScore) || 0,
   executionScore: Number(verdict.executionScore) || 0,
-  validationScore: Number(verdict.validationScore) || 0,
+  validationScore: Number(verdict.finalScore) || 0,
   recommendation: verdict.recommendation || "TEST_MORE"
 };
 };
