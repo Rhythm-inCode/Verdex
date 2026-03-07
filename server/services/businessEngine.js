@@ -36,18 +36,23 @@ import fetchCompetitionData from "./external/competitionProvider.js";
 
   const profitMetrics = calculateProfitMetrics(product);
 
-const verdict = generateVerdict({
-  demandScore,
-  competitionScore: competitionRisk ?? 35,
-  rawMarginPercent: profitMetrics.rawMarginPercent,
-  netMarginPercent: profitMetrics.netMarginPercent,
-  config
-});
+  const competitionScore =
+    typeof competitionRisk === "number"
+      ? competitionRisk
+      : 35;
+
+  const verdict = generateVerdict({
+    demandScore,
+    competitionScore,   // 🔴 FIX
+    rawMarginPercent: profitMetrics.rawMarginPercent,
+    netMarginPercent: profitMetrics.netMarginPercent,
+    config
+  });
 
 
   return {
     demandScore,
-    competitionScore: competitionRisk ?? 35, 
+    competitionScore, 
     ...profitMetrics,
     ...verdict
   };
