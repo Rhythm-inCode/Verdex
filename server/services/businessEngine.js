@@ -49,6 +49,8 @@ import fetchCompetitionData from "./external/competitionProvider.js";
     config
   });
 
+  console.log("PROFIT METRICS:", profitMetrics);
+
 
 return {
   demandScore: Number(demandScore) || 0,
