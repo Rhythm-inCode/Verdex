@@ -29,12 +29,16 @@ const validateProduct = async ({ product }) => {
           product.sellingPrice) * 100
       : 0;
 
-  let productScore =
-    demandScore * config.demandWeight +
-    (100 - competitionScore) * config.competitionWeight +
-    rawMarginPercent * config.marginWeight;
+const safeDemand = Number(demandScore) || 0;
+const safeCompetition = Number(competitionScore) || 0;
+const safeMargin = Number(rawMarginPercent) || 0;
 
-  productScore = Math.round(productScore);
+let productScore =
+  safeDemand * config.demandWeight +
+  (100 - safeCompetition) * config.competitionWeight +
+  safeMargin * config.marginWeight;
+
+productScore = Math.round(productScore || 0);
 
   // -------------------------
   // EXECUTION LAYER
@@ -70,10 +74,12 @@ const validateProduct = async ({ product }) => {
   // FINAL INTELLIGENCE
   // -------------------------
 
-  const finalScore = Math.round(
-    productScore * config.productWeight +
-    executionScore * config.executionWeight
-  );
+const safeExecution = Number(executionScore) || 0;
+
+const finalScore = Math.round(
+  productScore * config.productWeight +
+  safeExecution * config.executionWeight
+);
 
   let recommendation = "TEST_MORE";
 
