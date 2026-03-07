@@ -1,14 +1,7 @@
 import axios from "axios";
 
 const fetchCompetitionData = async ({ keyword }) => {
-
-  console.log("=== COMPETITION RUNNING ===");
-
   try {
-    console.log("KEY:", process.env.SERP_API_KEY);
-console.log("KEY TYPE:", typeof process.env.SERP_API_KEY);
-    console.log("SERP KEY:", process.env.SERP_API_KEY);
-
     const response = await axios.get("https://serpapi.com/search", {
       params: {
         engine: "google",
@@ -17,39 +10,33 @@ console.log("KEY TYPE:", typeof process.env.SERP_API_KEY);
       }
     });
 
-    console.log("SERP RESPONSE:", response.data);
+    console.log("SERP OK");
 
-    const rawResults =
-      response.data?.search_information?.total_results || 0;
+    // ✅ CORRECT FIELD (ALWAYS EXISTS)
+    const resultCount = response.data?.organic_results?.length || 0;
 
-    const resultCount = Number(
-      String(rawResults).replace(/[^0-9]/g, "")
-    );
+    console.log("RESULT COUNT:", resultCount);
 
-    if (!resultCount || isNaN(resultCount)) {
+    // fallback if low results
+    if (resultCount === 0) {
       return { competitionRisk: 35 };
     }
 
-    const logValue = Math.log10(resultCount);
+    // ✅ simple scaling (REALISTIC)
+    let risk;
 
-    const minLog = 3;
-    const maxLog = 8;
-
-    let normalized = (logValue - minLog) / (maxLog - minLog);
-    normalized = Math.max(0, Math.min(1, normalized));
-
-    const risk = Math.round(normalized * 100);
+    if (resultCount <= 3) risk = 20;
+    else if (resultCount <= 6) risk = 40;
+    else if (resultCount <= 9) risk = 65;
+    else risk = 85;
 
     console.log("FINAL RISK:", risk);
 
     return { competitionRisk: risk };
 
   } catch (err) {
-    console.error("SERP ERROR:", err.response?.data || err.message);
-
-    console.log("ERROR HIT");
-console.log(err.response?.data || err.message);
-    return { competitionRisk: 35 };
+    console.error("SERP error:", err.response?.data || err.message);
+    return { competitionRisk: 50 };
   }
 };
 
