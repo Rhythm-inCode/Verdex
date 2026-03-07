@@ -50,12 +50,22 @@ import fetchCompetitionData from "./external/competitionProvider.js";
   });
 
 
-  return {
-    demandScore,
-    competitionScore, 
-    ...profitMetrics,
-    ...verdict
-  };
+return {
+  demandScore: Number(demandScore) || 0,
+
+  competitionScore: Number(competitionRisk) || 0,
+
+  grossProfit: Number(profitMetrics.grossProfit) || 0,
+  netProfit: Number(profitMetrics.netProfit) || 0,
+  rawMarginPercent: Number(profitMetrics.rawMarginPercent) || 0,
+  netMarginPercent: Number(profitMetrics.netMarginPercent) || 0,
+  breakEvenROAS: Number(profitMetrics.breakEvenROAS) || 0,
+
+  productScore: Number(verdict.productScore) || 0,
+  executionScore: Number(verdict.executionScore) || 0,
+  validationScore: Number(verdict.validationScore) || 0,
+  recommendation: verdict.recommendation || "TEST_MORE"
+};
 };
 
 export default runBusinessValidation;
