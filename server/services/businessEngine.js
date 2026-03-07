@@ -53,7 +53,10 @@ import fetchCompetitionData from "./external/competitionProvider.js";
 return {
   demandScore: Number(demandScore) || 0,
 
-  competitionScore: Number(competitionRisk) || 0,
+  competitionScore:
+  typeof competitionRisk === "number"
+    ? competitionRisk
+    : 35,
 
   grossProfit: Number(profitMetrics.grossProfit) || 0,
   netProfit: Number(profitMetrics.netProfit) || 0,
