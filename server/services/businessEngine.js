@@ -38,7 +38,7 @@ import fetchCompetitionData from "./external/competitionProvider.js";
 
 const verdict = generateVerdict({
   demandScore,
-  competitionRisk,
+  competitionScore: competitionRisk ?? 35,
   rawMarginPercent: profitMetrics.rawMarginPercent,
   netMarginPercent: profitMetrics.netMarginPercent,
   config
@@ -47,10 +47,7 @@ const verdict = generateVerdict({
 
   return {
     demandScore,
-    competitionScore:   
-      typeof competitionRisk === "number"
-        ? competitionRisk
-        : 35,  
+    competitionScore: competitionRisk ?? 35, 
     ...profitMetrics,
     ...verdict
   };
