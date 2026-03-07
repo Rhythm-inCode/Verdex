@@ -47,7 +47,7 @@ const verdict = generateVerdict({
 
   return {
     demandScore,
-    competitionRisk,
+    competitionScore: competitionRisk,
     ...profitMetrics,
     ...verdict
   };

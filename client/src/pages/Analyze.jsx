@@ -78,7 +78,7 @@ export default function Analyze() {
 
       setBaseScores({
         demandScore: validation.demandScore,
-        competitionRisk: validation.competitionRisk
+        competitionScore: validation.competitionScore
       });
 
       setLivePrice(Number(form.sellingPrice));
@@ -102,7 +102,7 @@ export default function Analyze() {
 
     const calculated = calculateValidation({
       demandScore: baseScores.demandScore,
-      competitionRisk: baseScores.competitionRisk,
+      competitionScore: baseScores.competitionScore,
       costPrice: cost,
       sellingPrice: price,
       adCost: Number(adCost || 0),
@@ -238,7 +238,7 @@ export default function Analyze() {
 
           <ResultCard label="Demand Score" value={result.demandScore} />
 
-          <RiskDial value={result.competitionRisk} />
+          <RiskDial value={result.competitionScore} />
 
           <ResultCard label="Net Margin %" value={result.netMarginPercent} />
 
@@ -321,7 +321,7 @@ export default function Analyze() {
 
                 <BreakdownBar
                   label="Competition Risk"
-                  value={result.competitionRisk}
+                  value={result.competitionScore}
                 />
 
                 <BreakdownBar
