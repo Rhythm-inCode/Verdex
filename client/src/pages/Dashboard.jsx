@@ -6,30 +6,40 @@ import DashboardCharts from "../components/DashboardCharts";
 import PageContainer from "../components/ui/PageContainer";
 
 export default function Dashboard() {
-  const [validations, setValidations] = useState([]);
+const [validations, setValidations] = useState([]);
 
-  useEffect(() => {
-    api.get("/validate/validations")
-      .then(res => setValidations(res.data))
-      .catch(err => console.error(err));
-  }, []);
+useEffect(() => {
+  api.get("/validate/validations")
+    .then(res => {
+      setValidations(
+        Array.isArray(res.data.validations)
+          ? res.data.validations
+          : []
+      );
+    })
+    .catch(err => console.error(err));
+}, []);
 
-  const total = validations.length;
+const total = validations.length;
 
-  const avgScore =
-    total === 0
-      ? 0
-      : Math.round(
-          validations.reduce((sum, v) => sum + v.validationScore, 0) / total
-        );
+const avgScore =
+  total === 0
+    ? 0
+    : Math.round(
+        (validations || []).reduce(
+          (sum, v) => sum + (v.validationScore || 0),
+          0
+        ) / total
+      );
 
-  const goCount = validations.filter(v => v.recommendation === "GO").length;
+const goCount =
+  (validations || []).filter(v => v.recommendation === "GO").length;
 
-  const goRatio =
-    total === 0 ? 0 : Math.round((goCount / total) * 100);
+const goRatio =
+  total === 0 ? 0 : Math.round((goCount / total) * 100);
 
-  const health =
-    avgScore > 70 ? "Strong" : avgScore > 40 ? "Moderate" : "Weak";
+const health =
+  avgScore > 70 ? "Strong" : avgScore > 40 ? "Moderate" : "Weak";
 
   return (
     <PageContainer>

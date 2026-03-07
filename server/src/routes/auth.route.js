@@ -338,7 +338,7 @@ router.get(
         return res.redirect("http://localhost:5173/verify-2fa");
       }
 
-      return res.redirect("http://localhost:5173/dashboard");
+      return res.redirect("https://verdex-20.vercel.app/dashboard");
 
     } catch (err) {
       next(err);
