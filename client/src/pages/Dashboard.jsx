@@ -11,6 +11,8 @@ const [validations, setValidations] = useState([]);
 useEffect(() => {
   api.get("/validate/validations")
     .then(res => {
+      console.log("VALIDATIONS:", res.data); // debug
+
       setValidations(
         Array.isArray(res.data.validations)
           ? res.data.validations
