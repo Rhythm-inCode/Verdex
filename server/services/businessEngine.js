@@ -47,7 +47,10 @@ const verdict = generateVerdict({
 
   return {
     demandScore,
-    competitionScore: competitionRisk,
+    competitionScore:   
+      typeof competitionRisk === "number"
+        ? competitionRisk
+        : 35,  
     ...profitMetrics,
     ...verdict
   };
