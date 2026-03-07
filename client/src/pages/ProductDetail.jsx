@@ -57,10 +57,10 @@ useEffect(() => {
     else if (product.demandScore < 50)
       reasons.push("Weak demand signal observed");
 
-    if (product.competitionScore >= 70)
+    if (product.competitionRisk >= 70)
       reasons.push("High competition detected");
 
-    else if (product.competitionScore <= 45)
+    else if (product.competitionRisk <= 45)
       reasons.push("Low competition opportunity");
 
     if (product.netMarginPercent >= 55)
@@ -103,7 +103,7 @@ useEffect(() => {
               <h3 className="text-lg font-semibold">Score Components</h3>
 
               <BreakdownBar label="Demand Score" value={product.demandScore} />
-              <BreakdownBar label="Competition Score" value={product.competitionScore} invert />
+              <BreakdownBar label="Competition Score" value={product.competitionRisk} invert />
               <BreakdownBar label="Product Score" value={product.productScore} />
               <BreakdownBar label="Execution Score" value={product.executionScore} />
               <BreakdownBar label="Net Margin %" value={product.netMarginPercent} />
