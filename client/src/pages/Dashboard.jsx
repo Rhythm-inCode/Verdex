@@ -11,13 +11,16 @@ const [validations, setValidations] = useState([]);
 useEffect(() => {
   api.get("/validate/validations")
     .then(res => {
-      console.log("VALIDATIONS:", res.data); // debug
+      const data = res.data;
 
-      setValidations(
-        Array.isArray(res.data.validations)
-          ? res.data.validations
-          : []
-      );
+      // 🔴 universal fix
+      if (Array.isArray(data)) {
+        setValidations(data);
+      } else if (Array.isArray(data.validations)) {
+        setValidations(data.validations);
+      } else {
+        setValidations([]);
+      }
     })
     .catch(err => console.error(err));
 }, []);
@@ -28,14 +31,12 @@ const avgScore =
   total === 0
     ? 0
     : Math.round(
-        (validations || []).reduce(
-          (sum, v) => sum + (v.validationScore || 0),
-          0
-        ) / total
+        validations.reduce((sum, v) => sum + (v.validationScore || 0), 0) /
+          total
       );
 
 const goCount =
-  (validations || []).filter(v => v.recommendation === "GO").length;
+  validations.filter(v => v.recommendation === "GO").length;
 
 const goRatio =
   total === 0 ? 0 : Math.round((goCount / total) * 100);
