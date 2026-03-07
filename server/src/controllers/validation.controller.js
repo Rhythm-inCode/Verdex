@@ -57,8 +57,8 @@ if (!product) {
       productId: product._id,
       category: req.body.category,
       demandScore: engineResult.demandScore,
-      competitionScore: engineResult.competitionRisk,
-      validationScore: engineResult.finalScore,
+      competitionScore: engineResult.competitionScore,   // 🔴 FIX
+      validationScore: engineResult.validationScore,     // 🔴 FIX
       recommendation: engineResult.recommendation,
       grossProfit: engineResult.grossProfit,
       netProfit: engineResult.netProfit,
