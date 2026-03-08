@@ -30,10 +30,10 @@ const fetchTrendData = async ({ keyword }) => {
 
     let score = avg;
 
-    if (recentAvg > avg) score += 8;
+    if (recentAvg > avg) score += 5;
     if (avg < 20) score -= 10;
 
-    const finalScore = Math.max(35, Math.min(90, Math.round(score)));
+    const finalScore = Math.max(30, Math.min(95, Math.round(score)));
 
     return { trendScore: finalScore };
 
