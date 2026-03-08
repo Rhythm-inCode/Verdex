@@ -28,12 +28,19 @@ const fetchTrendData = async ({ keyword }) => {
     const recentAvg =
       recent.reduce((a, b) => a + b, 0) / recent.length;
 
-    let score = avg;
+let score;
 
-    if (recentAvg > avg) score += 5;
-    if (avg < 20) score -= 10;
+// 🔥 REAL SCALING
+if (avg < 20) score = 45;
+else if (avg < 40) score = 60;
+else if (avg < 60) score = 70;
+else if (avg < 75) score = 80;
+else score = 88;
 
-    const finalScore = Math.max(30, Math.min(95, Math.round(score)));
+// momentum adjustment
+if (recentAvg > avg) score += 3;
+
+const finalScore = Math.max(40, Math.min(92, Math.round(score)));
 
     return { trendScore: finalScore };
 
