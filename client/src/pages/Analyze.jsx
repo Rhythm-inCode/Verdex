@@ -439,9 +439,13 @@ function RiskDial({ value }) {
         Risk Level
       </p>
 
-      <div className="relative w-40 h-40 flex items-center justify-center">
+    <div className="relative w-[140px] h-[140px] sm:w-[150px] sm:h-[150px] flex items-center justify-center">
 
-        <svg height={radius * 2} width={radius * 2}>
+        <svg
+          height={radius * 2}
+          width={radius * 2}
+          viewBox={`0 0 ${radius * 2} ${radius * 2}`}
+        >
           <circle
             stroke="#27272a"
             fill="transparent"
